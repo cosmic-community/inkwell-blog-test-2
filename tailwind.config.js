@@ -1,81 +1,55 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   content: [
-    './app/**/*.{js,ts,jsx,tsx}',
-    './components/**/*.{js,ts,jsx,tsx}',
+    './app/**/*.{js,ts,jsx,tsx,mdx}',
+    './components/**/*.{js,ts,jsx,tsx,mdx}',
+    './lib/**/*.{js,ts,jsx,tsx,mdx}',
   ],
   theme: {
     extend: {
-      fontFamily: {
-        sans: ['Inter', 'ui-sans-serif', 'system-ui', '-apple-system', 'BlinkMacSystemFont', 'sans-serif'],
-      },
       colors: {
         ink: {
-          50: '#f8f9fa',
-          100: '#f1f3f5',
-          200: '#e9ecef',
-          300: '#dee2e6',
-          400: '#ced4da',
-          500: '#adb5bd',
-          600: '#868e96',
-          700: '#495057',
-          800: '#343a40',
-          900: '#212529',
-          950: '#0d1117',
+          50: '#f6f7f9',
+          100: '#eceef2',
+          200: '#d5d9e2',
+          300: '#b1b9c8',
+          400: '#8793a9',
+          500: '#68768e',
+          600: '#535f76',
+          700: '#444d60',
+          800: '#3b4251',
+          900: '#343a46',
+          950: '#23272e',
         },
         accent: {
-          DEFAULT: '#6366f1',
-          light: '#818cf8',
-          dark: '#4f46e5',
+          light: '#93c5fd',
+          DEFAULT: '#3b82f6',
+          dark: '#1d4ed8',
         },
       },
-      typography: {
+      typography: ({ theme }) => ({
         DEFAULT: {
           css: {
+            '--tw-prose-body': theme('colors.ink.700'),
+            '--tw-prose-headings': theme('colors.ink.900'),
+            '--tw-prose-lead': theme('colors.ink.600'),
+            '--tw-prose-links': theme('colors.accent.DEFAULT'),
+            '--tw-prose-bold': theme('colors.ink.900'),
+            '--tw-prose-counters': theme('colors.ink.500'),
+            '--tw-prose-bullets': theme('colors.ink.400'),
+            '--tw-prose-hr': theme('colors.ink.200'),
+            '--tw-prose-quotes': theme('colors.ink.600'),
+            '--tw-prose-quote-borders': theme('colors.accent.DEFAULT'),
+            '--tw-prose-captions': theme('colors.ink.500'),
+            '--tw-prose-code': theme('colors.ink.900'),
+            '--tw-prose-pre-code': theme('colors.ink.200'),
+            '--tw-prose-pre-bg': theme('colors.ink.900'),
+            '--tw-prose-th-borders': theme('colors.ink.300'),
+            '--tw-prose-td-borders': theme('colors.ink.200'),
             maxWidth: 'none',
-            color: '#343a40',
-            h1: {
-              color: '#212529',
-              fontWeight: '800',
-            },
-            h2: {
-              color: '#212529',
-              fontWeight: '700',
-            },
-            h3: {
-              color: '#212529',
-              fontWeight: '600',
-            },
-            a: {
-              color: '#6366f1',
-              textDecoration: 'underline',
-              '&:hover': {
-                color: '#4f46e5',
-              },
-            },
-            strong: {
-              color: '#212529',
-            },
-            code: {
-              color: '#6366f1',
-              backgroundColor: '#f1f3f5',
-              padding: '0.25rem 0.375rem',
-              borderRadius: '0.25rem',
-              fontWeight: '500',
-            },
-            'code::before': {
-              content: '""',
-            },
-            'code::after': {
-              content: '""',
-            },
-            blockquote: {
-              borderLeftColor: '#6366f1',
-              color: '#495057',
-            },
           },
         },
-      },
+      }),
     },
   },
   plugins: [

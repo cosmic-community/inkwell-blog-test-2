@@ -8,8 +8,12 @@ interface MarkdownContentProps {
 }
 
 export default function MarkdownContent({ content }: MarkdownContentProps) {
+  if (!content) {
+    return null
+  }
+
   return (
-    <div className="prose prose-lg max-w-none prose-headings:text-ink-900 prose-p:text-ink-700 prose-li:text-ink-700 prose-strong:text-ink-900 prose-a:text-accent hover:prose-a:text-accent-dark">
+    <div className="prose prose-lg max-w-none">
       <ReactMarkdown
         remarkPlugins={[remarkGfm]}
         components={{
@@ -58,6 +62,11 @@ export default function MarkdownContent({ content }: MarkdownContentProps) {
               {children}
             </strong>
           ),
+          em: ({ children, ...props }) => (
+            <em {...props} className="italic">
+              {children}
+            </em>
+          ),
           img: ({ src, alt, ...props }) => {
             const srcStr = typeof src === 'string' ? src : ''
             const optimizedSrc = srcStr && srcStr.includes('imgix.cosmicjs.com')
@@ -91,6 +100,9 @@ export default function MarkdownContent({ content }: MarkdownContentProps) {
             >
               {children}
             </blockquote>
+          ),
+          hr: ({ ...props }) => (
+            <hr {...props} className="border-ink-200 my-8" />
           ),
         }}
       />
