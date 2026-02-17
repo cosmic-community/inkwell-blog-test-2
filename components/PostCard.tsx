@@ -1,6 +1,7 @@
 import Link from 'next/link'
 import type { Post } from '@/types'
 import CategoryBadge from '@/components/CategoryBadge'
+import StopPropagation from '@/components/StopPropagation'
 
 interface PostCardProps {
   post: Post
@@ -36,9 +37,9 @@ export default function PostCard({ post, featured = false }: PostCardProps) {
           )}
           <div className="absolute inset-0 flex flex-col justify-end p-6 sm:p-8 lg:p-10">
             {category && (
-              <div className="mb-3" onClick={(e) => e.stopPropagation()}>
+              <StopPropagation className="mb-3">
                 <CategoryBadge category={category} size="md" />
-              </div>
+              </StopPropagation>
             )}
             <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-white mb-3 group-hover:text-accent-light transition-colors">
               {post.metadata?.title || post.title}
