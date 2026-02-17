@@ -15,6 +15,24 @@ interface ChildrenProps {
   [key: string]: unknown
 }
 
+interface AnchorProps {
+  href?: string
+  children?: ReactNode
+  [key: string]: unknown
+}
+
+interface ImageProps {
+  src?: string
+  alt?: string
+  [key: string]: unknown
+}
+
+interface CodeProps {
+  children?: ReactNode
+  className?: string
+  [key: string]: unknown
+}
+
 // Changed: Rebuilt MarkdownContent with improved hydration handling and comprehensive element styling
 export default function MarkdownContent({ content, className = '' }: MarkdownContentProps) {
   const [mounted, setMounted] = useState(false)
@@ -124,7 +142,7 @@ export default function MarkdownContent({ content, className = '' }: MarkdownCon
               {children}
             </em>
           ),
-          a: ({ href, children, ...props }: { href?: string; children?: ReactNode; [key: string]: unknown }) => (
+          a: ({ href, children, ...props }: AnchorProps) => (
             <a
               {...props}
               href={href}
@@ -143,10 +161,10 @@ export default function MarkdownContent({ content, className = '' }: MarkdownCon
               {children}
             </blockquote>
           ),
-          hr: ({ ...props }: { [key: string]: unknown }) => (
+          hr: ({ ...props }: Record<string, unknown>) => (
             <hr {...props} className="border-ink-200 my-8" />
           ),
-          img: ({ src, alt, ...props }: { src?: string; alt?: string; [key: string]: unknown }) => {
+          img: ({ src, alt, ...props }: ImageProps) => {
             const srcStr = typeof src === 'string' ? src : ''
             const optimizedSrc = srcStr && srcStr.includes('imgix.cosmicjs.com')
               ? `${srcStr}?w=1400&auto=format,compress`
@@ -161,7 +179,7 @@ export default function MarkdownContent({ content, className = '' }: MarkdownCon
               />
             )
           },
-          code: ({ children, className: codeClassName, ...props }: { children?: ReactNode; className?: string; [key: string]: unknown }) => {
+          code: ({ children, className: codeClassName, ...props }: CodeProps) => {
             const isInline = !codeClassName
             if (isInline) {
               return (
