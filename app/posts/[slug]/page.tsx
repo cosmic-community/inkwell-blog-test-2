@@ -26,6 +26,7 @@ export async function generateMetadata({ params }: PostPageProps): Promise<Metad
   }
 }
 
+// Changed: Rebuilt post page with improved markdown content rendering
 export default async function PostPage({ params }: PostPageProps) {
   const { slug } = await params
   const post = await getPostBySlug(slug)
@@ -47,7 +48,7 @@ export default async function PostPage({ params }: PostPageProps) {
 
   return (
     <article>
-      {/* Hero */}
+      {/* Hero Image */}
       {image && (
         <div className="relative aspect-[3/1] max-h-[480px] overflow-hidden bg-ink-900">
           <img
@@ -104,7 +105,7 @@ export default async function PostPage({ params }: PostPageProps) {
           </div>
         </header>
 
-        {/* Post Content */}
+        {/* Post Content — Changed: Using MarkdownContent component for proper rendering */}
         <div className="max-w-3xl mx-auto py-10 sm:py-12">
           {post.metadata?.content ? (
             <MarkdownContent content={post.metadata.content} />

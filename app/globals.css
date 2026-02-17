@@ -19,7 +19,7 @@
   }
 }
 
-/* Changed: Enhanced prose content styles for markdown rendering */
+/* Enhanced prose content styles for markdown rendering */
 @layer utilities {
   .prose h1 {
     @apply text-3xl sm:text-4xl font-black text-ink-900 mt-8 mb-6 pb-3 border-b border-ink-200;
@@ -31,6 +31,10 @@
 
   .prose h3 {
     @apply text-xl sm:text-2xl font-semibold text-ink-900 mt-8 mb-3;
+  }
+
+  .prose h4 {
+    @apply text-lg sm:text-xl font-semibold text-ink-900 mt-6 mb-2;
   }
 
   .prose p {
@@ -49,6 +53,11 @@
     @apply text-ink-700 leading-relaxed;
   }
 
+  .prose li > ul,
+  .prose li > ol {
+    @apply mt-2;
+  }
+
   .prose strong {
     @apply font-semibold text-ink-900;
   }
@@ -63,6 +72,10 @@
 
   .prose blockquote {
     @apply border-l-4 border-accent pl-4 italic text-ink-600 my-6;
+  }
+
+  .prose blockquote p {
+    @apply mb-0;
   }
 
   .prose hr {
@@ -85,12 +98,28 @@
     @apply rounded-lg shadow-md my-6;
   }
 
-  /* Changed: Ensure markdown-content div renders children visibly */
+  .prose table {
+    @apply w-full border-collapse my-6;
+  }
+
+  .prose th {
+    @apply border border-ink-200 px-4 py-2 bg-ink-50 text-left font-semibold text-ink-900;
+  }
+
+  .prose td {
+    @apply border border-ink-200 px-4 py-2 text-ink-700;
+  }
+
+  /* Ensure markdown-content wrapper renders children correctly */
   .markdown-content > * {
     @apply block;
   }
 
   .markdown-content > *:first-child {
     @apply mt-0;
+  }
+
+  .markdown-content > *:last-child {
+    @apply mb-0;
   }
 }

@@ -8,6 +8,7 @@ export const metadata: Metadata = {
   description: 'Learn more about Inkwell Blog — our story, our mission, and the team behind the words.',
 }
 
+// Changed: Rebuilt about page with improved layout and markdown rendering
 export default async function AboutPage() {
   const [page, authors] = await Promise.all([
     getPageBySlug('about'),
@@ -42,8 +43,9 @@ export default async function AboutPage() {
         </div>
       </section>
 
+      {/* Main Content Area */}
       <div className="container-blog py-12 sm:py-16">
-        {/* Markdown Content from CMS — Our Story, What We Cover, Mission, etc. */}
+        {/* Markdown Content from CMS */}
         {page?.metadata?.content ? (
           <section className="max-w-3xl mx-auto mb-16">
             <MarkdownContent content={page.metadata.content} />

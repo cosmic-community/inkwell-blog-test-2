@@ -6,10 +6,11 @@ import remarkGfm from 'remark-gfm'
 
 interface MarkdownContentProps {
   content: string
+  className?: string
 }
 
-export default function MarkdownContent({ content }: MarkdownContentProps) {
-  // Changed: Use mounted state to avoid SSR/hydration mismatch with react-markdown v9
+// Changed: Rebuilt MarkdownContent with improved hydration handling and comprehensive element styling
+export default function MarkdownContent({ content, className = '' }: MarkdownContentProps) {
   const [mounted, setMounted] = useState(false)
 
   useEffect(() => {
@@ -20,22 +21,29 @@ export default function MarkdownContent({ content }: MarkdownContentProps) {
     return null
   }
 
-  // Changed: Show a minimal placeholder during SSR to avoid hydration issues
+  // Changed: Show skeleton loader during SSR to prevent hydration mismatch
   if (!mounted) {
     return (
-      <div className="prose prose-lg max-w-none animate-pulse">
-        <div className="h-4 bg-ink-100 rounded w-3/4 mb-4" />
-        <div className="h-4 bg-ink-100 rounded w-full mb-4" />
-        <div className="h-4 bg-ink-100 rounded w-5/6 mb-4" />
+      <div className={`prose prose-lg max-w-none ${className}`}>
+        <div className="animate-pulse space-y-4">
+          <div className="h-6 bg-ink-100 rounded w-2/3" />
+          <div className="h-4 bg-ink-100 rounded w-full" />
+          <div className="h-4 bg-ink-100 rounded w-5/6" />
+          <div className="h-4 bg-ink-100 rounded w-4/5" />
+          <div className="h-6 bg-ink-100 rounded w-1/2 mt-8" />
+          <div className="h-4 bg-ink-100 rounded w-full" />
+          <div className="h-4 bg-ink-100 rounded w-3/4" />
+        </div>
       </div>
     )
   }
 
   return (
-    <div className="markdown-content prose prose-lg max-w-none prose-headings:text-ink-900 prose-p:text-ink-700 prose-a:text-accent hover:prose-a:text-accent-dark prose-strong:text-ink-900 prose-blockquote:text-ink-600 prose-blockquote:border-accent prose-li:text-ink-700 prose-hr:border-ink-200">
+    <div className={`markdown-content prose prose-lg max-w-none ${className}`}>
       <ReactMarkdown
         remarkPlugins={[remarkGfm]}
         components={{
+          // Changed: Explicit component overrides ensure proper class application
           h1: ({ children, ...props }) => (
             <h1
               {...props}
@@ -59,6 +67,14 @@ export default function MarkdownContent({ content }: MarkdownContentProps) {
             >
               {children}
             </h3>
+          ),
+          h4: ({ children, ...props }) => (
+            <h4
+              {...props}
+              className="text-lg sm:text-xl font-semibold text-ink-900 mt-6 mb-2"
+            >
+              {children}
+            </h4>
           ),
           p: ({ children, ...props }) => (
             <p
@@ -102,21 +118,6 @@ export default function MarkdownContent({ content }: MarkdownContentProps) {
               {children}
             </em>
           ),
-          img: ({ src, alt, ...props }) => {
-            const srcStr = typeof src === 'string' ? src : ''
-            const optimizedSrc = srcStr && srcStr.includes('imgix.cosmicjs.com')
-              ? `${srcStr}?w=1400&auto=format,compress`
-              : srcStr
-            return (
-              <img
-                {...props}
-                src={optimizedSrc || ''}
-                alt={alt || ''}
-                className="rounded-lg shadow-md my-6"
-                loading="lazy"
-              />
-            )
-          },
           a: ({ href, children, ...props }) => (
             <a
               {...props}
@@ -139,8 +140,23 @@ export default function MarkdownContent({ content }: MarkdownContentProps) {
           hr: ({ ...props }) => (
             <hr {...props} className="border-ink-200 my-8" />
           ),
-          code: ({ children, className, ...props }) => {
-            const isInline = !className
+          img: ({ src, alt, ...props }) => {
+            const srcStr = typeof src === 'string' ? src : ''
+            const optimizedSrc = srcStr && srcStr.includes('imgix.cosmicjs.com')
+              ? `${srcStr}?w=1400&auto=format,compress`
+              : srcStr
+            return (
+              <img
+                {...props}
+                src={optimizedSrc || ''}
+                alt={alt || ''}
+                className="rounded-lg shadow-md my-6"
+                loading="lazy"
+              />
+            )
+          },
+          code: ({ children, className: codeClassName, ...props }) => {
+            const isInline = !codeClassName
             if (isInline) {
               return (
                 <code
@@ -152,7 +168,7 @@ export default function MarkdownContent({ content }: MarkdownContentProps) {
               )
             }
             return (
-              <code {...props} className={className}>
+              <code {...props} className={codeClassName}>
                 {children}
               </code>
             )
@@ -164,6 +180,26 @@ export default function MarkdownContent({ content }: MarkdownContentProps) {
             >
               {children}
             </pre>
+          ),
+          table: ({ children, ...props }) => (
+            <div className="overflow-x-auto my-6">
+              <table {...props} className="w-full border-collapse">
+                {children}
+              </table>
+            </div>
+          ),
+          th: ({ children, ...props }) => (
+            <th
+              {...props}
+              className="border border-ink-200 px-4 py-2 bg-ink-50 text-left font-semibold text-ink-900"
+            >
+              {children}
+            </th>
+          ),
+          td: ({ children, ...props }) => (
+            <td {...props} className="border border-ink-200 px-4 py-2 text-ink-700">
+              {children}
+            </td>
           ),
         }}
       />
