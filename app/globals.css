@@ -19,8 +19,12 @@
   }
 }
 
-/* Ensure prose content renders markdown correctly */
+/* Changed: Enhanced prose content styles for markdown rendering */
 @layer utilities {
+  .prose h1 {
+    @apply text-3xl sm:text-4xl font-black text-ink-900 mt-8 mb-6 pb-3 border-b border-ink-200;
+  }
+
   .prose h2 {
     @apply text-2xl sm:text-3xl font-bold text-ink-900 mt-10 mb-4 pb-2 border-b border-ink-200;
   }
@@ -37,6 +41,10 @@
     @apply list-disc list-outside pl-6 space-y-2 mb-6;
   }
 
+  .prose ol {
+    @apply list-decimal list-outside pl-6 space-y-2 mb-6;
+  }
+
   .prose li {
     @apply text-ink-700 leading-relaxed;
   }
@@ -45,11 +53,44 @@
     @apply font-semibold text-ink-900;
   }
 
+  .prose em {
+    @apply italic;
+  }
+
   .prose a {
     @apply text-accent hover:text-accent-dark underline transition-colors;
   }
 
   .prose blockquote {
     @apply border-l-4 border-accent pl-4 italic text-ink-600 my-6;
+  }
+
+  .prose hr {
+    @apply border-ink-200 my-8;
+  }
+
+  .prose code {
+    @apply bg-ink-100 text-ink-800 px-1.5 py-0.5 rounded text-sm font-mono;
+  }
+
+  .prose pre {
+    @apply bg-ink-900 text-ink-200 rounded-lg p-4 overflow-x-auto my-6;
+  }
+
+  .prose pre code {
+    @apply bg-transparent p-0 text-inherit;
+  }
+
+  .prose img {
+    @apply rounded-lg shadow-md my-6;
+  }
+
+  /* Changed: Ensure markdown-content div renders children visibly */
+  .markdown-content > * {
+    @apply block;
+  }
+
+  .markdown-content > *:first-child {
+    @apply mt-0;
   }
 }
