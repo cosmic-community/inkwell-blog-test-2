@@ -43,13 +43,13 @@ export default async function AboutPage() {
       </section>
 
       <div className="container-blog py-12 sm:py-16">
-        {/* Page Content */}
+        {/* Markdown Content from CMS — Our Story, What We Cover, Mission, etc. */}
         {page?.metadata?.content ? (
-          <div className="max-w-3xl mx-auto mb-16">
+          <section className="max-w-3xl mx-auto mb-16">
             <MarkdownContent content={page.metadata.content} />
-          </div>
+          </section>
         ) : (
-          <div className="max-w-3xl mx-auto mb-16 text-center py-12">
+          <section className="max-w-3xl mx-auto mb-16 text-center py-12">
             <p className="text-6xl mb-4">📖</p>
             <h2 className="text-2xl font-bold text-ink-900 mb-2">About page content coming soon</h2>
             <p className="text-ink-500">
@@ -64,42 +64,8 @@ export default async function AboutPage() {
               </a>{' '}
               to populate this page.
             </p>
-          </div>
+          </section>
         )}
-
-        {/* Topic Highlights Section */}
-        <section className="max-w-4xl mx-auto mb-16">
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-            <div className="bg-white rounded-xl border border-ink-200 p-6 hover:shadow-md transition-shadow">
-              <span className="text-3xl mb-3 block">💻</span>
-              <h3 className="font-bold text-ink-900 text-lg mb-2">Technology</h3>
-              <p className="text-ink-500 text-sm leading-relaxed">
-                Thoughtful takes on the tools and trends shaping our world.
-              </p>
-            </div>
-            <div className="bg-white rounded-xl border border-ink-200 p-6 hover:shadow-md transition-shadow">
-              <span className="text-3xl mb-3 block">✈️</span>
-              <h3 className="font-bold text-ink-900 text-lg mb-2">Travel</h3>
-              <p className="text-ink-500 text-sm leading-relaxed">
-                Stories from the road that go beyond the guidebook.
-              </p>
-            </div>
-            <div className="bg-white rounded-xl border border-ink-200 p-6 hover:shadow-md transition-shadow">
-              <span className="text-3xl mb-3 block">🌿</span>
-              <h3 className="font-bold text-ink-900 text-lg mb-2">Lifestyle</h3>
-              <p className="text-ink-500 text-sm leading-relaxed">
-                Practical wisdom for living well, from productivity to creativity.
-              </p>
-            </div>
-            <div className="bg-white rounded-xl border border-ink-200 p-6 hover:shadow-md transition-shadow">
-              <span className="text-3xl mb-3 block">🎨</span>
-              <h3 className="font-bold text-ink-900 text-lg mb-2">Culture</h3>
-              <p className="text-ink-500 text-sm leading-relaxed">
-                Deep dives into the art, media, and movements that define our times.
-              </p>
-            </div>
-          </div>
-        </section>
 
         {/* Team / Authors Section */}
         {authors.length > 0 && (
