@@ -14,9 +14,10 @@ export default function MarkdownContent({ content }: MarkdownContentProps) {
         remarkPlugins={[remarkGfm]}
         components={{
           img: ({ src, alt, ...props }) => {
-            const optimizedSrc = src && src.includes('imgix.cosmicjs.com')
-              ? `${src}?w=1400&auto=format,compress`
-              : src
+            const srcStr = typeof src === 'string' ? src : '' // Changed: narrow src to string to fix TS2339
+            const optimizedSrc = srcStr && srcStr.includes('imgix.cosmicjs.com')
+              ? `${srcStr}?w=1400&auto=format,compress`
+              : srcStr
             return (
               <img
                 {...props}
