@@ -67,6 +67,40 @@ export default async function AboutPage() {
           </div>
         )}
 
+        {/* Topic Highlights Section */}
+        <section className="max-w-4xl mx-auto mb-16">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+            <div className="bg-white rounded-xl border border-ink-200 p-6 hover:shadow-md transition-shadow">
+              <span className="text-3xl mb-3 block">💻</span>
+              <h3 className="font-bold text-ink-900 text-lg mb-2">Technology</h3>
+              <p className="text-ink-500 text-sm leading-relaxed">
+                Thoughtful takes on the tools and trends shaping our world.
+              </p>
+            </div>
+            <div className="bg-white rounded-xl border border-ink-200 p-6 hover:shadow-md transition-shadow">
+              <span className="text-3xl mb-3 block">✈️</span>
+              <h3 className="font-bold text-ink-900 text-lg mb-2">Travel</h3>
+              <p className="text-ink-500 text-sm leading-relaxed">
+                Stories from the road that go beyond the guidebook.
+              </p>
+            </div>
+            <div className="bg-white rounded-xl border border-ink-200 p-6 hover:shadow-md transition-shadow">
+              <span className="text-3xl mb-3 block">🌿</span>
+              <h3 className="font-bold text-ink-900 text-lg mb-2">Lifestyle</h3>
+              <p className="text-ink-500 text-sm leading-relaxed">
+                Practical wisdom for living well, from productivity to creativity.
+              </p>
+            </div>
+            <div className="bg-white rounded-xl border border-ink-200 p-6 hover:shadow-md transition-shadow">
+              <span className="text-3xl mb-3 block">🎨</span>
+              <h3 className="font-bold text-ink-900 text-lg mb-2">Culture</h3>
+              <p className="text-ink-500 text-sm leading-relaxed">
+                Deep dives into the art, media, and movements that define our times.
+              </p>
+            </div>
+          </div>
+        </section>
+
         {/* Team / Authors Section */}
         {authors.length > 0 && (
           <section className="max-w-4xl mx-auto">
