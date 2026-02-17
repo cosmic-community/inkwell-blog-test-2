@@ -20,6 +20,12 @@ export default function Header() {
               Home
             </Link>
             <Link
+              href="/about"
+              className="px-3 py-2 text-sm font-medium text-ink-300 hover:text-white rounded-md hover:bg-ink-800 transition-colors"
+            >
+              About
+            </Link>
+            <Link
               href="/categories"
               className="px-3 py-2 text-sm font-medium text-ink-300 hover:text-white rounded-md hover:bg-ink-800 transition-colors"
             >

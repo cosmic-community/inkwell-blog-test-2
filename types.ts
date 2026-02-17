@@ -46,6 +46,19 @@ export interface Post extends CosmicObject {
   };
 }
 
+// Page type
+export interface Page extends CosmicObject {
+  metadata: {
+    heading: string;
+    subheading?: string;
+    content?: string;
+    hero_image?: {
+      url: string;
+      imgix_url: string;
+    };
+  };
+}
+
 // API response types
 export interface CosmicResponse<T> {
   objects: T[];
